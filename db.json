@@ -1,3 +1,52 @@
 {
-    "clientes": []
+  "clientes": [
+    {
+      "nombre": "Ivan",
+      "empresa": "React",
+      "email": "ivanjv1234@gmail.com",
+      "telefono": "123456",
+      "notas": "Hola ",
+      "id": 1
+    },
+    {
+      "nombre": "Ivan",
+      "empresa": "React",
+      "email": "ivanjv1234@gmail.com",
+      "telefono": "515002313313131",
+      "notas": "Hola",
+      "id": 2
+    },
+    {
+      "nombre": "Sergio",
+      "empresa": "Fest",
+      "email": "zs20019172@estudiantes.uv.mx",
+      "telefono": "123456",
+      "notas": "Hola",
+      "id": 3
+    },
+    {
+      "nombre": "Norma",
+      "empresa": "Node",
+      "email": "ivanvasquez13sep@gmail.com",
+      "telefono": "123456",
+      "notas": "Hola mundo",
+      "id": 4
+    },
+    {
+      "nombre": "Alberto",
+      "empresa": "Rails",
+      "email": "zs20019172@estudiantes.uv.mx",
+      "telefono": "123456",
+      "notas": "",
+      "id": 5
+    },
+    {
+      "nombre": "Marta",
+      "empresa": "React",
+      "email": "ivanjv1234@gmail.com",
+      "telefono": "",
+      "notas": "",
+      "id": 6
+    }
+  ]
 }

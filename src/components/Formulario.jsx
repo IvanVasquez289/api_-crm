@@ -1,15 +1,16 @@
 import React from 'react'
 import { Formik, Form, Field} from 'formik'
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import Alerta from './Alerta'
 const Formulario = () => {
-
+  const navigate = useNavigate()
   const nuevoClienteSchema = Yup.object().shape({
     nombre: Yup.string()
                 .min(3, 'El nombre es muy corto')
                 .max(12, 'El nombre es muy largo')
                 .required('El nombre del cliente es obligatorio') ,
-    empresa: Yup.string()
+    empresa: Yup.string()       
                 .required('El nombre de la empresa es obligatorio'),
     email: Yup.string()
                 .email('Email no valido')
@@ -23,8 +24,27 @@ const Formulario = () => {
   })    
 
 //   Este handle solo funciona cuando pasa damos submit y la validacion es correcta
-  const handleSubmit = (valores) => {
-    console.log(valores)
+  const handleSubmit = async (valores) => {
+    // console.log(valores)
+
+    try {
+        const url = 'http://localhost:4000/clientes'
+
+        const respuesta = await fetch(url,{
+            method: 'POST',
+            body: JSON.stringify(valores),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        console.log(respuesta)
+        const resultado = await respuesta.json()
+        console.log(resultado)
+
+        navigate('/clientes')
+    } catch (error) {
+        console.log(error)
+    }
   }
 
   return (
@@ -40,8 +60,10 @@ const Formulario = () => {
                 notas:''
             }}
 
-            onSubmit={(values)=>{
-                handleSubmit(values)
+            onSubmit={ async (values, {resetForm} )=>{
+                await handleSubmit(values)
+
+                resetForm()
             }}
 
             validationSchema={nuevoClienteSchema}
@@ -118,7 +140,7 @@ const Formulario = () => {
                     <input 
                         type="submit" 
                         value="Agregar Cliente"
-                        className='mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg'
+                        className='mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg cursor-pointer'
                     />
                 </Form>
                 )
