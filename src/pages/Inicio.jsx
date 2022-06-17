@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { array } from "yup";
 import Cliente from "../components/Cliente";
 const Inicio = () => {
   const [clientes, setClientes] = useState([]);
@@ -18,6 +19,28 @@ const Inicio = () => {
     obtenerClientesAPI();
   }, []);
 
+  const handleEliminar = async (id) => {
+    const confirmar = confirm()
+
+    if(confirmar){
+      try {
+        const url = `http://localhost:4000/clientes/${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+
+        })
+
+        const resultado = await respuesta.json()
+        const clientesArray = clientes.filter(cliente => cliente.id !== id)
+        setClientes(clientesArray)
+        // console.log(resultado) si imprimes el resultado, mostrara el json en este caso como es delete, sera un obj vacio
+        
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
   return (
     <>
       <h1 className="font-black text-4xl text-blue-900">Clientes</h1>
@@ -38,6 +61,7 @@ const Inicio = () => {
             <Cliente
               key={cliente.id}
               cliente={cliente}
+              handleEliminar = {handleEliminar}
             />
           ))}
         </tbody>

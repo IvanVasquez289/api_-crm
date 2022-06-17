@@ -5,7 +5,10 @@ const VerCliente = () => {
   const [cliente, setCliente] = useState({})
   const [cargando, setCargando] = useState(true)
   const {id} = useParams();
+  // const params = useParams()
+  // params.id   los params son las variables en la url, en este caso id e
   
+  // Hacemos fetch a la url
   useEffect(() => {
     const obtenerClienteApi = async () => {
       try {
@@ -19,12 +22,12 @@ const VerCliente = () => {
       }
       setTimeout(() => {
         setCargando(!cargando)
-      }, 1500);
+      }, 1000);
     }
 
     obtenerClienteApi()
   }, [])
-  console.log(cargando)
+  // console.log(cargando)
 
   return (
     cargando ? <Spinner/> :
